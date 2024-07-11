@@ -15,13 +15,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
-          maven-version: '3.8.8'
 
       - name: Install Maven 3.8
         run: |
           brew unlink maven
-          brew link --force --overwrite maven@3.8.8
-          mvn -v
+          brew tap-new $USER/homebrew-old
+          brew extract --version=3.8.8 maven $USER/homebrew-old
+          brew install $USER/homebrew-old/maven@3.8.8
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
