@@ -19,9 +19,9 @@ jobs:
 
       - name: Install Maven 3.8
         run: |
-          brew uninstall maven
-          brew search maven 3
-
+          brew unlink maven
+          brew link --force --overwrite maven@3.8.8
+          mvn -v
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
