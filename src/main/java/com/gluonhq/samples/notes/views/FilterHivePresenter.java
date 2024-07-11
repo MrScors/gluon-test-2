@@ -24,40 +24,57 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.samples.notes;
+package com.gluonhq.samples.notes.views;
 
+import com.gluonhq.attach.display.DisplayService;
+import com.gluonhq.attach.util.Platform;
 import com.gluonhq.charm.glisten.application.AppManager;
-import com.gluonhq.charm.glisten.visual.Swatch;
-import com.gluonhq.samples.notes.views.AppViewManager;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import com.gluonhq.samples.notes.Main;
+import com.gluonhq.samples.notes.model.Hive;
+import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
-public class Main extends Application {
+import java.util.function.Predicate;
 
-    public static final String POPUP_FILTER_NOTES = "Filter Notes";
-    public static final String POPUP_FILTER_HIVES = "Filter Hives";
-    private final AppManager appManager = AppManager.initialize(this::postInit);
 
-    @Override
-    public void init() {
-        AppViewManager.registerViewsAndDrawer();
+public class FilterHivePresenter {
+
+    @FXML private TextField searchField;
+    @FXML private CheckBox aliveFlag;
+    @FXML private ToolBar toolBar;
+
+    public void initialize() {
+        HBox.setHgrow(searchField, Priority.ALWAYS);
+
+        if (Platform.isIOS() && ! toolBar.getStyleClass().contains("ios")) {
+            toolBar.getStyleClass().add("ios");
+        }
+        boolean notch = DisplayService.create().map(DisplayService::hasNotch).orElse(false);
+        if (notch && ! toolBar.getStyleClass().contains("notch")) {
+            toolBar.getStyleClass().add("notch");
+        }
+    }
+    
+    @FXML
+    private void search() {
+        AppManager.getInstance().hideLayer(Main.POPUP_FILTER_HIVES);
+    }
+    
+    @FXML
+    private void close() {
+        searchField.clear();
+        AppManager.getInstance().hideLayer(Main.POPUP_FILTER_HIVES);
     }
 
-    @Override
-    public void start(Stage stage) {
-        appManager.start(stage);
+    public Predicate<? super Hive> getPredicate() {
+        return n -> (searchField.getText() == null
+                || searchField.getText().isEmpty()
+                || n.getOccupiedBoxes().contains(Integer.parseInt(searchField.getText())))
+                && (!aliveFlag.isSelected() || n.isAlive());
     }
 
-    private void postInit(Scene scene) {
-        Swatch.LIGHT_GREEN.assignTo(scene);
-
-        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

@@ -1,0 +1,17 @@
+
+.text-field {
+    -fx-prompt-text-fill: #ffffff80;
+}
+
+.top-box {
+    -fx-padding: 1mm 2mm 1mm 1mm;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.top-box.ios {
+    -fx-padding: 5.6mm 2mm 1mm 1mm;
+}
+
+.top-box.ios.notch {
+    -fx-padding: 11.52mm 2mm 1mm 1mm;
+}

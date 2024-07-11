@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2021, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,40 +24,18 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.samples.notes;
+package com.gluonhq.samples.notes.views;
 
-import com.gluonhq.charm.glisten.application.AppManager;
-import com.gluonhq.charm.glisten.visual.Swatch;
-import com.gluonhq.samples.notes.views.AppViewManager;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import com.gluonhq.samples.notes.model.Hive;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
-public class Main extends Application {
-
-    public static final String POPUP_FILTER_NOTES = "Filter Notes";
-    public static final String POPUP_FILTER_HIVES = "Filter Hives";
-    private final AppManager appManager = AppManager.initialize(this::postInit);
-
-    @Override
-    public void init() {
-        AppViewManager.registerViewsAndDrawer();
+public class ModelHive {
+    
+    private final ObjectProperty<Hive> activeHive = new SimpleObjectProperty<>();
+    
+    public ObjectProperty<Hive> getActiveHive() {
+        return activeHive;
     }
-
-    @Override
-    public void start(Stage stage) {
-        appManager.start(stage);
-    }
-
-    private void postInit(Scene scene) {
-        Swatch.LIGHT_GREEN.assignTo(scene);
-
-        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }

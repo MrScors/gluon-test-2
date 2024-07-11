@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2021, Gluon
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,40 +24,46 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.samples.notes;
+package com.gluonhq.samples.notes.views;
 
-import com.gluonhq.charm.glisten.application.AppManager;
-import com.gluonhq.charm.glisten.visual.Swatch;
-import com.gluonhq.samples.notes.views.AppViewManager;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import com.gluonhq.charm.glisten.control.CharmListCell;
+import com.gluonhq.samples.notes.model.Hive;
+import javafx.scene.control.Label;
 
-public class Main extends Application {
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-    public static final String POPUP_FILTER_NOTES = "Filter Notes";
-    public static final String POPUP_FILTER_HIVES = "Filter Hives";
-    private final AppManager appManager = AppManager.initialize(this::postInit);
+public class HeaderHiveCell extends CharmListCell<Hive> {
 
-    @Override
-    public void init() {
-        AppViewManager.registerViewsAndDrawer();
+    private final Label label;
+    private Hive currentItem;
+    private final DateTimeFormatter dateFormat;
+
+    public HeaderHiveCell() {
+        label = new Label();
+        dateFormat = DateTimeFormatter.ofPattern("EEEE, MMM dd", Locale.ENGLISH);
     }
 
     @Override
-    public void start(Stage stage) {
-        appManager.start(stage);
+    public void updateItem(Hive item, boolean empty) {
+        super.updateItem(item, empty);
+        currentItem = item;
+        if (!empty && item != null) {
+            updateWithSettings();
+            setGraphic(label);
+        } else {
+            setGraphic(null);
+        }
     }
 
-    private void postInit(Scene scene) {
-        Swatch.LIGHT_GREEN.assignTo(scene);
-
-        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+    private void updateWithSettings() {
+        if (currentItem != null) {
+            label.setText(dateFormat.format(LocalDateTime.ofEpochSecond(currentItem.getCreationDate(), 0, ZoneOffset.UTC)));
+        } else {
+            label.setText("");
+        }
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }

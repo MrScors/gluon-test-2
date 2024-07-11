@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import com.gluonhq.charm.glisten.control.CharmListView?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.layout.BorderPane?>
+
+<View fx:id="hives" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.notes.views.HivesPresenter">
+   <center>
+      <CharmListView fx:id="lstHives" BorderPane.alignment="CENTER" />
+   </center>
+</View>

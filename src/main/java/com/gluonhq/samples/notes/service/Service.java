@@ -34,6 +34,7 @@ import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.ConnectState;
 import com.gluonhq.connect.provider.DataProvider;
+import com.gluonhq.samples.notes.model.Hive;
 import com.gluonhq.samples.notes.model.Note;
 import com.gluonhq.samples.notes.model.Settings;
 import javafx.beans.property.ListProperty;
@@ -42,15 +43,18 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javax.annotation.PostConstruct;
+import java.util.Comparator;
 
 public class Service {
     
     private static final String NOTES = "notes-v4";
-    
+    private static final String HIVES = "hives-v4";
+
     private static final String NOTES_SETTINGS = "notes-settings-v4";
     
     private final ListProperty<Note> notes = new SimpleListProperty<>(FXCollections.observableArrayList());
-    
+
+    private final ListProperty<Hive> hives = new SimpleListProperty<>(FXCollections.observableArrayList());
     private final ObjectProperty<Settings> settings = new SimpleObjectProperty<>(new Settings());
     
     private DataClient dataClient;
@@ -108,5 +112,36 @@ public class Service {
     public ObjectProperty<Settings> settingsProperty() {
         return settings;
     }
-    
+
+    public void retrieveHives() {
+        GluonObservableList<Hive> retrievedHives = DataProvider.retrieveList(
+                dataClient.createListDataReader(HIVES, Hive.class,
+                        SyncFlag.LIST_WRITE_THROUGH, SyncFlag.OBJECT_WRITE_THROUGH));
+
+        retrievedHives.stateProperty().addListener((obs, ov, nv) -> {
+            if (ConnectState.SUCCEEDED.equals(nv)) {
+                hives.set(retrievedHives);
+                retrieveSettings();
+            }
+        });
+    }
+
+    public Hive addHive(Hive hive) {
+        if(hive.getId() == 0 && !hives.isEmpty()){
+            hives.sort(Comparator.comparingInt(Hive::getId));
+            hive.setId(hives.get(hives.size() - 1).getId() + 1);
+        }
+        hives.get().add(hive);
+        return hive;
+    }
+
+    public void removeHive(Hive hive) {
+        hives.get().remove(hive);
+    }
+
+    public ListProperty<Hive> hivesProperty() {
+        return hives;
+    }
+
+
 }
