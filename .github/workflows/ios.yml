@@ -27,7 +27,7 @@ jobs:
         run: tar -xzf apache-maven-3.8.8-bin.tar.gz
 
       - name: Verify Maven 3.8.8 installation
-        run: /usr/local/apache-maven-3.8.8/mvn -v
+        run: /usr/local/apache-maven-3.8.8/bin/mvn -v
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Gluon Build
-        run: /usr/local/apache-maven-3.8.8/mvn -Pios gluonfx:build gluonfx:package
+        run: /usr/local/apache-maven-3.8.8/bin/mvn -Pios gluonfx:build gluonfx:package
 
       - name: Make staging directory
         run: mkdir staging
