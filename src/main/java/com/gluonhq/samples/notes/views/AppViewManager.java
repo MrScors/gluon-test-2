@@ -45,13 +45,12 @@ import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK
 public class AppViewManager {
 
     private static final AppViewRegistry REGISTRY = new AppViewRegistry();
-
     private static final ResourceBundle bundle = ResourceBundle.getBundle("com.gluonhq.samples.notes.drawer");
-    public static final AppView HIVES_VIEW = view(bundle.getString("view.hives.text"), HivesPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER, SKIP_VIEW_STACK);
     public static final AppView NOTES_VIEW = view(bundle.getString("view.notes.text"), NotesPresenter.class, MaterialDesignIcon.LIST, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
-    public static final AppView EDITHIVE_VIEW = view(bundle.getString("view.edithive.text"), EditHivePresenter.class, MaterialDesignIcon.EDIT, SKIP_VIEW_STACK);
-    public static final AppView EDITNOTE_VIEW = view(bundle.getString("view.editnote.text"), EditNotePresenter.class, MaterialDesignIcon.EDIT, SKIP_VIEW_STACK);
-    public static final AppView SETTINGS_VIEW = view(bundle.getString("view.settings.text"), SettingsPresenter.class, MaterialDesignIcon.SETTINGS, SHOW_IN_DRAWER);
+    public static final AppView HIVES_VIEW = view(bundle.getString("view.hives.text"), HivesPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER);
+    public static final AppView EDITHIVE_VIEW = view(bundle.getString("view.edithive.text"), EditHivePresenter.class, MaterialDesignIcon.EDIT);
+    public static final AppView EDITNOTE_VIEW = view(bundle.getString("view.editnote.text"), EditNotePresenter.class, MaterialDesignIcon.EDIT);
+    public static final AppView SETTINGS_VIEW = view(bundle.getString("view.settings.text"), SettingsPresenter.class, MaterialDesignIcon.SETTINGS);
     
     private static AppView view(String title, Class<?> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
         return REGISTRY.createView(name(presenterClass), title, presenterClass, menuIcon, flags);

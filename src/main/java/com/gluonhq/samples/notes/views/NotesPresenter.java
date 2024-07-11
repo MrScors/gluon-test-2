@@ -77,7 +77,7 @@ public class NotesPresenter {
                 AppManager.getInstance().showLayer(Main.POPUP_FILTER_NOTES));
         filterButton.getStyleClass().add("filter-button");
 
-        notes.setShowTransitionFactory(BounceInLeftTransition::new);
+//        notes.setShowTransitionFactory(BounceInLeftTransition::new);
         notes.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = AppManager.getInstance().getAppBar();
@@ -128,7 +128,7 @@ public class NotesPresenter {
     
     private void edit(Note note) {
         model.activeNote().set(note);
-        AppViewManager.EDITNOTE_VIEW.switchView();
+        AppViewManager.HIVES_VIEW.switchView();
     }
     
     private void remove(Note note) {

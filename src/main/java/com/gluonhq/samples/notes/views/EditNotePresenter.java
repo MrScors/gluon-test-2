@@ -61,7 +61,7 @@ public class EditNotePresenter {
     private boolean editMode;
 
     public void initialize() {
-        editNote.setShowTransitionFactory(BounceInRightTransition::new);
+//        editNote.setShowTransitionFactory(BounceInRightTransition::new);
         
         editNote.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {

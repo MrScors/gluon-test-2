@@ -63,7 +63,7 @@ public class SettingsPresenter {
     private Settings config;
 
     public void initialize() {
-        settings.setShowTransitionFactory(BounceInUpTransition::new);
+//        settings.setShowTransitionFactory(BounceInUpTransition::new);
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = AppManager.getInstance().getAppBar();
