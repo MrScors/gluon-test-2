@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.CheckBox?>
-<View fx:id="edition" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.notes.views.EditHivePresenter">
+<View fx:id="editHive" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.notes.views.EditHivePresenter">
    <center>
       <VBox prefHeight="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>

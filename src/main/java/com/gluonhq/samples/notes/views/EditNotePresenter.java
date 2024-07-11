@@ -49,7 +49,7 @@ public class EditNotePresenter {
 
     @Inject private Model model;
 
-    @FXML private View edition;
+    @FXML private View editNote;
 
     @FXML private Button submit;
     @FXML private Button cancel;
@@ -61,9 +61,9 @@ public class EditNotePresenter {
     private boolean editMode;
 
     public void initialize() {
-        edition.setShowTransitionFactory(BounceInRightTransition::new);
+        editNote.setShowTransitionFactory(BounceInRightTransition::new);
         
-        edition.showingProperty().addListener((obs, oldValue, newValue) -> {
+        editNote.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 submit.disableProperty().unbind();
                 

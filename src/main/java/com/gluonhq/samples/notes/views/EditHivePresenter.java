@@ -53,7 +53,7 @@ public class EditHivePresenter {
 
     @Inject private ModelHive modelHive;
 
-    @FXML private View edition;
+    @FXML private View editHive;
 
     @FXML private Button submit;
     @FXML private Button cancel;
@@ -67,7 +67,7 @@ public class EditHivePresenter {
     public void initialize() {
 //        edition.setShowTransitionFactory(BounceInRightTransition::new);
 
-        edition.showingProperty().addListener((obs, oldValue, newValue) -> {
+        editHive.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 submit.disableProperty().unbind();
                 

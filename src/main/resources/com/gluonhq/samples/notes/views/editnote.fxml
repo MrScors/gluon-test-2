@@ -37,7 +37,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<View fx:id="edition"  xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.notes.views.EditNotePresenter">
+<View fx:id="editNote" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.notes.views.EditNotePresenter">
    <center>
       <VBox prefHeight="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>

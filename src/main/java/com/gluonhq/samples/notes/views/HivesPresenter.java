@@ -58,7 +58,6 @@ import java.util.ResourceBundle;
 
 public class HivesPresenter {
 
-    private static final PseudoClass PSEUDO_FILTER_ENABLED = PseudoClass.getPseudoClass("filter-enabled");
 
     @FXML private View hives;
 
@@ -127,7 +126,7 @@ public class HivesPresenter {
     
     private void edit(Hive hive) {
         modelHive.getActiveHive().set(hive);
-        AppViewManager.EDIT_HIVE_VIEW.switchView();
+        AppViewManager.EDITHIVE_VIEW.switchView();
     }
     
     private void remove(Hive hive) {
