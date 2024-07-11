@@ -26,19 +26,8 @@ jobs:
       - name: Extract Maven 3.8.8
         run: tar -xzf apache-maven-3.8.8-bin.tar.gz
 
-      - name: Set up Maven 3.8.8
-        run: |
-          sudo mv apache-maven-3.8.8 /usr/local/apache-maven-3.8.8
-          echo "export M2_HOME=/usr/local/apache-maven-3.8.8"
-          echo "export M2_HOME=/usr/local/apache-maven-3.8.8" >> $GITHUB_ENV
-          export M2_HOME=/usr/local/apache-maven-3.8.8
-          echo "export PATH=\$M2_HOME/bin:\$PATH"
-          echo "export PATH=\$M2_HOME/bin:\$PATH" >> $GITHUB_ENV
-          export PATH=\$M2_HOME/bin:\$PATH
-        shell: bash
-
       - name: Verify Maven 3.8.8 installation
-        run: mvn -v
+        run: /usr/local/apache-maven-3.8.8/mvn -v
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
@@ -46,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Gluon Build
-        run: mvn -Pios gluonfx:build gluonfx:package
+        run: /usr/local/apache-maven-3.8.8/mvn -Pios gluonfx:build gluonfx:package
 
       - name: Make staging directory
         run: mkdir staging
