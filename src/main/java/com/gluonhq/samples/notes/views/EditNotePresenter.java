@@ -43,7 +43,7 @@ import javafx.scene.control.TextField;
 import javax.inject.Inject;
 import java.util.ResourceBundle;
 
-public class EditionPresenter {
+public class EditNotePresenter {
 
     @Inject private Service service;
 

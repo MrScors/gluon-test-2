@@ -49,7 +49,7 @@ public class AppViewManager {
     private static final ResourceBundle bundle = ResourceBundle.getBundle("com.gluonhq.samples.notes.drawer");
 
     public static final AppView NOTES_VIEW = view(bundle.getString("view.notes.text"), NotesPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
-    public static final AppView EDITION_VIEW = view(bundle.getString("view.edition.text"), EditionPresenter.class, MaterialDesignIcon.EDIT, SHOW_IN_DRAWER);
+    public static final AppView EDITION_VIEW = view(bundle.getString("view.edition.text"), EditNotePresenter.class, MaterialDesignIcon.EDIT, SHOW_IN_DRAWER);
     public static final AppView SETTINGS_VIEW = view(bundle.getString("view.settings.text"), SettingsPresenter.class, MaterialDesignIcon.SETTINGS, SHOW_IN_DRAWER);
     
     private static AppView view(String title, Class<?> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
