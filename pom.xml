@@ -133,13 +133,17 @@
                     </attachList>
                     <mainClass>${main.class}</mainClass>
                     <reflectionList>
+                        <list>com.gluonhq.samples.notes.model.Hive</list>
                         <list>com.gluonhq.samples.notes.model.Model</list>
                         <list>com.gluonhq.samples.notes.model.Note</list>
                         <list>com.gluonhq.samples.notes.model.Settings</list>
                         <list>com.gluonhq.samples.notes.service.Service</list>
                         <list>com.gluonhq.samples.notes.views.EditNotePresenter</list>
+                        <list>com.gluonhq.samples.notes.views.EditHivePresenter</list>
                         <list>com.gluonhq.samples.notes.views.FilterPresenter</list>
+                        <list>com.gluonhq.samples.notes.views.FilterHivePresenter</list>
                         <list>com.gluonhq.samples.notes.views.NotesPresenter</list>
+                        <list>com.gluonhq.samples.notes.views.HivesPresenter</list>
                         <list>com.gluonhq.samples.notes.views.SettingsPresenter</list>
                     </reflectionList>
                     <bundlesList>

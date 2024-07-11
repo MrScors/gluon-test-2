@@ -128,7 +128,7 @@ public class NotesPresenter {
     
     private void edit(Note note) {
         model.activeNote().set(note);
-        AppViewManager.HIVES_VIEW.switchView();
+        AppViewManager.EDITNOTE_VIEW.switchView();
     }
     
     private void remove(Note note) {
