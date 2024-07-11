@@ -1,0 +1,40 @@
+name: iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Java and Maven
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+          maven-version: '3.8.8'
+
+
+      - name: Setup Gluon's GraalVM
+        uses: gluonhq/setup-graalvm@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Gluon Build
+        run: mvn -Pios gluonfx:build gluonfx:package
+
+
+      - name: Make staging directory
+        run: mkdir staging
+
+      - name: Copy packages to staging
+        run: cp -r target/gluonfx/ios/gvm/BeeAware.* staging
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Package
+          path: staging
