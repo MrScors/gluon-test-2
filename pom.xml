@@ -144,9 +144,12 @@
                     </reflectionList>
                     <bundlesList>
                         <list>com.gluonhq.samples.notes.drawer</list>
-                        <list>com.gluonhq.samples.notes.views.edition</list>
+                        <list>com.gluonhq.samples.notes.views.editnote</list>
+                        <list>com.gluonhq.samples.notes.views.edithive</list>
                         <list>com.gluonhq.samples.notes.views.filter</list>
+                        <list>com.gluonhq.samples.notes.views.filterhive</list>
                         <list>com.gluonhq.samples.notes.views.notes</list>
+                        <list>com.gluonhq.samples.notes.views.hives</list>
                         <list>com.gluonhq.samples.notes.views.settings</list>
                     </bundlesList>
                 </configuration>
