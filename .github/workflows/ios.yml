@@ -17,6 +17,11 @@ jobs:
           cache: 'maven'
           maven-version: '3.8.8'
 
+      - name: Install Maven 3.8
+        run: |
+          brew uninstall maven
+          brew install maven@3.8
+
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
@@ -25,7 +30,6 @@ jobs:
 
       - name: Gluon Build
         run: mvn -Pios gluonfx:build gluonfx:package
-
 
       - name: Make staging directory
         run: mkdir staging
