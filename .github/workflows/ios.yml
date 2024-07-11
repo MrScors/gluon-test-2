@@ -29,8 +29,12 @@ jobs:
       - name: Set up Maven 3.8.8
         run: |
           sudo mv apache-maven-3.8.8 /usr/local/apache-maven-3.8.8
+          echo "export M2_HOME=/usr/local/apache-maven-3.8.8"
           echo "export M2_HOME=/usr/local/apache-maven-3.8.8" >> $GITHUB_ENV
+          export M2_HOME=/usr/local/apache-maven-3.8.8
+          echo "export PATH=\$M2_HOME/bin:\$PATH"
           echo "export PATH=\$M2_HOME/bin:\$PATH" >> $GITHUB_ENV
+          export PATH=\$M2_HOME/bin:\$PATH
         shell: bash
 
       - name: Verify Maven 3.8.8 installation
