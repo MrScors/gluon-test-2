@@ -16,12 +16,25 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Install Maven 3.8
+      - name: Uninstall Maven 3.9
         run: |
-          brew unlink maven
-          brew tap-new $USER/homebrew-old
-          brew extract --version=3.8.8 maven $USER/homebrew-old
-          brew install $USER/homebrew-old/maven@3.8.8
+          brew uninstall maven
+
+      - name: Download Maven 3.8.8
+        run: curl -O https://downloads.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+
+      - name: Extract Maven 3.8.8
+        run: tar -xzf apache-maven-3.8.8-bin.tar.gz
+
+      - name: Set up Maven 3.8.8
+        run: |
+          sudo mv apache-maven-3.8.8 /usr/local/apache-maven-3.8.8
+          echo "export M2_HOME=/usr/local/apache-maven-3.8.8" >> $GITHUB_ENV
+          echo "export PATH=\$M2_HOME/bin:\$PATH" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Verify Maven 3.8.8 installation
+        run: mvn -v
 
       - name: Setup Gluon's GraalVM
         uses: gluonhq/setup-graalvm@master
